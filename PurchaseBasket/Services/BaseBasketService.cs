@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PurchaseBasket.Models;
@@ -9,23 +8,28 @@ namespace PurchaseBasket.Services
 {
     public class BaseBasketService : IBasketService
     {
-        private List<ProductModel> products = new List<ProductModel>();
+        private IList<ProductModel> products = new List<ProductModel>();
         const int MAX_WEIGHT = 20;
 
-        public async Task<Result<IEnumerable<ProductModel>>> GetListAsync()
+        public async Task<Result<IList<ProductModel>>> GetListAsync()
         {
-            return new Result<IEnumerable<ProductModel>> { Value = products };
+            return new Result<IList<ProductModel>> { Value = products };
         }
-        
+
         public async Task<Result> AddAsync(ProductModel product)
         {
+            if (string.IsNullOrWhiteSpace(product.Name) || product.Weight <= 0)
+            {
+                return new Result { Status = Status.Fail, Message = "Invalid product" };
+            }
+
             var result = CheckLimit(product);
             if (result.Status != Status.OK)
             {
                 return result;
             }
 
-            var idx = products.FindIndex(p => p.Weight <= product.Weight);
+            var idx = products.ToList().FindIndex(p => p.Weight <= product.Weight);
             products.Insert(idx == -1 ? products.Count : idx, product);
             return new Result();
         }

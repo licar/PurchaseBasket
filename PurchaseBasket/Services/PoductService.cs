@@ -9,9 +9,9 @@ namespace PurchaseBasket.Services
     {
         private IList<ProductModel> products = new List<ProductModel>();
 
-        public async Task<Result<IEnumerable<ProductModel>>> GetAsync()
+        public async Task<Result<IList<ProductModel>>> GetAsync()
         {
-            return new Result<IEnumerable<ProductModel>> { Value = products };
+            return new Result<IList<ProductModel>> { Value = products };
         }
 
         public async Task<Result> AddAsync(ProductModel product)

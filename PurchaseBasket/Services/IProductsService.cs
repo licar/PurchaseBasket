@@ -9,7 +9,7 @@ namespace PurchaseBasket.Services
 {
     public interface IProductsService
     {
-        Task<Result<IEnumerable<ProductModel>>> GetAsync();
+        Task<Result<IList<ProductModel>>> GetAsync();
         Task<Result> AddAsync(ProductModel product);
         Task<Result<ProductModel>> GetAsync(int id);
     }

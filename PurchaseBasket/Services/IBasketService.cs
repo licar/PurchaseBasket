@@ -7,7 +7,7 @@ namespace PurchaseBasket.Services
 {
     public interface IBasketService
     {
-        Task<Result<IEnumerable<ProductModel>>> GetListAsync();
+        Task<Result<IList<ProductModel>>> GetListAsync();
         Task<Result> AddAsync(ProductModel product);
     }
 }
