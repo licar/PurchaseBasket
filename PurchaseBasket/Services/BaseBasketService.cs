@@ -25,7 +25,7 @@ namespace PurchaseBasket.Services
                 return result;
             }
 
-            var idx = products.FindIndex(p => p.Weight >= product.Weight);
+            var idx = products.FindIndex(p => p.Weight <= product.Weight);
             products.Insert(idx == -1 ? products.Count : idx, product);
             return new Result();
         }
