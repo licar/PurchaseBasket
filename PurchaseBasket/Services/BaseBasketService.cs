@@ -29,7 +29,7 @@ namespace PurchaseBasket.Services
                 return result;
             }
 
-            //Change to binary search
+            //Change to SortedList
             var idx = products.ToList().FindIndex(p => p.Weight <= product.Weight);
             products.Insert(idx == -1 ? products.Count : idx, product);
             return new Result();
